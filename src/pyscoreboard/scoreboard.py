@@ -20,6 +20,12 @@ class Competitor:
         self.home_away = home_away
 
 
+class APIError(Exception):
+    """For holding error responses from the API"""
+
+    pass
+
+
 def fetch_scoreboard(sport, league, date_str=None):
     """Given the sport and leage, fetch the scores from the scoreboard API"""
 
@@ -29,5 +35,9 @@ def fetch_scoreboard(sport, league, date_str=None):
         f"https://site.api.espn.com/apis/site/v2/sports/{sport}/{league}/scoreboard",
         params=payload,
     )
+
+    if r.status_code != 200:
+        print(f"Req: url: {r.url}\nResponse Status: {r.status_code}")
+        raise APIError("Failed to fetch scoreboard from API")
 
     return r.text
