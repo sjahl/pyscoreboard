@@ -18,7 +18,7 @@ class Event:
         self.competitors = self._parse_competitors(competitors)
 
     def simple_score(self):
-        print("HOME 0   -   0 AWAY")
+        return "HOME 0   -   0 AWAY"
 
     @staticmethod
     def _parse_competitors(competitors: list[dict]) -> list[Competitor]:
@@ -34,7 +34,14 @@ class Event:
 
 class EventList:
     def __init__(self, events):
-        self.events = events
+        self.events = self._parse_events(events)
+
+    @staticmethod
+    def _parse_events(events: list[dict]) -> list[Event]:
+        return [
+            Event(ev["uid"], ev["shortName"], ev["competitions"][0]["competitors"])
+            for ev in events
+        ]
 
 
 class APIError(Exception):
@@ -64,4 +71,4 @@ def fetch_scoreboard(sport, league, date_str=None):
         print(f"Req: url: {r.url}\nResponse Status: {r.status_code}")
         raise APIError("Failed to fetch scoreboard from API")
 
-    return r.json()
+    return EventList(r.json()["events"])

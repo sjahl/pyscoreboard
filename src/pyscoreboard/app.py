@@ -79,8 +79,9 @@ def run():
         print(f"You want to fetch scores for {args.date}")
 
     try:
-        resp = fetch_scoreboard(args.sport, lg, args.date)
+        scores = fetch_scoreboard(args.sport, lg, args.date)
 
-        print(resp)
+        for game in scores.events:
+            print(game.simple_score())
     except APIError as e:
         print(e)
