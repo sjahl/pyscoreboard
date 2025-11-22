@@ -65,18 +65,13 @@ def friendly_league_mapping(league):
 
 
 def run():
+    print("Welcome to pyscoreboard!")
     args = parse_args()
-    print(f"You want to fetch scores for {args.sport}")
 
     if not args.league:
         lg = default_league(args.sport)
     else:
         lg = friendly_league_mapping(args.league)
-
-    print(f"You want to fetch scores for {lg}")
-
-    if args.date:
-        print(f"You want to fetch scores for {args.date}")
 
     try:
         scores = fetch_scoreboard(args.sport, lg, args.date)
