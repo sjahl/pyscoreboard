@@ -8,7 +8,13 @@ class Competitor:
         self.home_away = home_away
 
     def __eq__(self, other):
-        return all([self.score == other.score])
+        return all(
+            [
+                self.score == other.score,
+                self.team == other.team,
+                self.home_away == other.home_away,
+            ]
+        )
 
 
 class Event:
