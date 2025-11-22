@@ -23,8 +23,15 @@ class Event:
         self.short_name = short_name
         self.competitors = self._parse_competitors(competitors)
 
-    def simple_score(self):
-        return "HOME 0   -   0 AWAY"
+    @property
+    def simple_score(self) -> str:
+        home = 0
+        away = 1
+        if self.competitors[0].home_away != "home":
+            home = 1
+            away = 0
+
+        return f"{self.competitors[home].team.ljust(4)} {self.competitors[home].score.ljust(3)} - {self.competitors[away].score.rjust(3)} {self.competitors[away].team.rjust(4)}"
 
     @staticmethod
     def _parse_competitors(competitors: list[dict]) -> list[Competitor]:

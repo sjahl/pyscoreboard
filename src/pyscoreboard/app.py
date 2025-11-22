@@ -82,6 +82,6 @@ def run():
         scores = fetch_scoreboard(args.sport, lg, args.date)
 
         for game in scores.events:
-            print(game.simple_score())
+            print(game.simple_score)
     except APIError as e:
         print(e)

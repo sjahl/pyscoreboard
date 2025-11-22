@@ -46,3 +46,5 @@ assert isinstance(test_event, scoreboard.Event)
 assert isinstance(test_event.competitors[0], scoreboard.Competitor)
 assert test_event.competitors[0].team == "TOR"
 assert test_event.competitors[1].score == "5"
+
+assert test_event.simple_score == "TOR  4   -   5  LAD"
