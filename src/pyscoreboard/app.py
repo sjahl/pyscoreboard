@@ -78,6 +78,6 @@ def run():
     if args.date:
         print(f"You want to fetch scores for {args.date}")
 
-    resp = fetch_scoreboard(args.sport, lg)
+    resp = fetch_scoreboard(args.sport, lg, args.date)
 
     print(resp)
