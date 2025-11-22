@@ -1,10 +1,41 @@
 import requests
 
 
+class Team:
+    def __init__(self, abbreviation, display_name, short_name):
+        self._abbreviation = abbreviation
+        self._display_name = display_name
+        self._short_name = short_name
+
+    @property
+    def abbreviation(self):
+        return self._abbreviation
+
+    @abbreviation.setter
+    def abbreviation(self, value):
+        self._abbreviation = value
+
+    @property
+    def display_name(self):
+        return self._display_name
+
+    @display_name.setter
+    def display_name(self, value):
+        self._display_name = value
+
+    @property
+    def short_name(self):
+        return self._short_name
+
+    @short_name.setter
+    def short_name(self, value):
+        self._short_name = value
+
+
 class Competitor:
     def __init__(self, score, team, home_away):
         self.score = score
-        self.team = team
+        self.team = self._parse_team(team)
         self.home_away = home_away
 
     def __eq__(self, other):
@@ -13,6 +44,10 @@ class Competitor:
             self.team == other.team,
             self.home_away == other.home_away,
         ])
+
+    @staticmethod
+    def _parse_team(team: dict) -> Team:
+        return Team(team["abbreviation"], team["displayName"], team["shortDisplayName"])
 
 
 class Event:
@@ -29,14 +64,14 @@ class Event:
             home = 1
             away = 0
 
-        return f"{self.competitors[home].team.ljust(4)} {self.competitors[home].score.ljust(3)} - {self.competitors[away].score.rjust(3)} {self.competitors[away].team.rjust(4)}"
+        return f"{self.competitors[home].team.abbreviation.ljust(4)} {self.competitors[home].score.ljust(3)} - {self.competitors[away].score.rjust(3)} {self.competitors[away].team.abbreviation.rjust(4)}"
 
     @staticmethod
     def _parse_competitors(competitors: list[dict]) -> list[Competitor]:
         return [
             Competitor(
                 c["score"],
-                c["team"]["abbreviation"],
+                c["team"],
                 c["homeAway"],
             )
             for c in competitors

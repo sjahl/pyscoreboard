@@ -54,8 +54,8 @@ class TestEvent(unittest.TestCase):
         self.assertIsInstance(test_event.competitors[1], Competitor)
 
     def test_team_abbrev(self):
-        self.assertEqual(test_event.competitors[0].team, "TOR")
-        self.assertEqual(test_event.competitors[1].team, "LAD")
+        self.assertEqual(test_event.competitors[0].team.abbreviation, "TOR")
+        self.assertEqual(test_event.competitors[1].team.abbreviation, "LAD")
 
     def test_score_parsing(self):
         self.assertEqual(test_event.competitors[0].score, "4")
