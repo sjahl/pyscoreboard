@@ -51,7 +51,7 @@ def friendly_league_mapping(league):
         "bundesliga": "ger.1",
         "bundesliga-2": "ger.2",
         "eredivisie": "ned.1",
-        "college-football": "cfb",
+        "cfb": "college-football",
         "mls": "usa.1",
         "mx": "mex.1",
         "laliga": "esp.1",
