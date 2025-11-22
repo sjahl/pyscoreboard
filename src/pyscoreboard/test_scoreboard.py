@@ -1,6 +1,8 @@
-import scoreboard
+import unittest
 
-test_event = scoreboard.Event(
+from .scoreboard import Event, Competitor
+
+test_event = Event(
     uid="s:1~l:10~e:401809303",
     short_name="LAD @ TOR",
     competitors=[
@@ -42,9 +44,26 @@ test_event = scoreboard.Event(
     ],
 )
 
-assert isinstance(test_event, scoreboard.Event)
-assert isinstance(test_event.competitors[0], scoreboard.Competitor)
-assert test_event.competitors[0].team == "TOR"
-assert test_event.competitors[1].score == "5"
 
-assert test_event.simple_score == "TOR  4   -   5  LAD"
+class TestEvent(unittest.TestCase):
+    def test_event_init(self):
+        self.assertIsInstance(test_event, Event)
+
+    def test_parse_competitors(self):
+        self.assertIsInstance(test_event.competitors[0], Competitor)
+        self.assertIsInstance(test_event.competitors[1], Competitor)
+
+    def test_team_abbrev(self):
+        self.assertEqual(test_event.competitors[0].team, "TOR")
+        self.assertEqual(test_event.competitors[1].team, "LAD")
+
+    def test_score_parsing(self):
+        self.assertEqual(test_event.competitors[0].score, "4")
+        self.assertEqual(test_event.competitors[1].score, "5")
+
+    def test_simple_score(self):
+        self.assertEqual(test_event.simple_score, "TOR  4   -   5  LAD")
+
+
+if __name__ == "__main__":
+    unittest.main()
