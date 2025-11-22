@@ -11,3 +11,10 @@ This project is managed with `uv`.
 Install deps with `uv sync`
 
 Run the main executable with `uv run pyscoreboard`
+
+## Other implementations
+
+Also exercising this in:
+
+- [scoreboard - Golang](https://github.com/sjahl/scoreboard)
+- [scors - Rust](https://github.com/sjahl/scors)
