@@ -1,5 +1,7 @@
 import argparse
 
+from .scoreboard import fetch_scoreboard
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -15,6 +17,13 @@ def parse_args():
         "-l",
         "--league",
         help="The league to fetch scores for",
+        type=str,
+    )
+
+    parser.add_argument(
+        "-d",
+        "--date",
+        help="Fetch scores for the specified date, in YYYMMDD, ex: 20110615",
         type=str,
     )
 
@@ -57,7 +66,6 @@ def friendly_league_mapping(league):
 
 def run():
     args = parse_args()
-    print("hello world")
     print(f"You want to fetch scores for {args.sport}")
 
     if not args.league:
@@ -66,3 +74,10 @@ def run():
         lg = friendly_league_mapping(args.league)
 
     print(f"You want to fetch scores for {lg}")
+
+    if args.date:
+        print(f"You want to fetch scores for {args.date}")
+
+    resp = fetch_scoreboard(args.sport, lg)
+
+    print(resp)
