@@ -1,6 +1,6 @@
 import argparse
 
-from .scoreboard import fetch_scoreboard
+from .scoreboard import fetch_scoreboard, APIError
 
 
 def parse_args():
@@ -78,6 +78,9 @@ def run():
     if args.date:
         print(f"You want to fetch scores for {args.date}")
 
-    resp = fetch_scoreboard(args.sport, lg, args.date)
+    try:
+        resp = fetch_scoreboard(args.sport, lg, args.date)
 
-    print(resp)
+        print(resp)
+    except APIError as e:
+        print(e)
