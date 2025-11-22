@@ -50,13 +50,6 @@ class APIError(Exception):
     pass
 
 
-def parse_event(event):
-    # Given event
-    # Get the Competitors
-    # create an Event with uid short name and competitors list
-    pass
-
-
 def fetch_scoreboard(sport, league, date_str=None):
     """Given the sport and leage, fetch the scores from the scoreboard API"""
 
