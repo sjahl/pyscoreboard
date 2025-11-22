@@ -1,12 +1,9 @@
 import scoreboard
 
-blue_jays = scoreboard.Competitor("4", "TOR", "home")
-dodgers = scoreboard.Competitor("5", "LAD", "away")
-
-
-def test_parse_competitors():
-    """Should return a dict with home and away keys"""
-    competitors = [
+test_event = scoreboard.Event(
+    uid="s:1~l:10~e:401809303",
+    short_name="LAD @ TOR",
+    competitors=[
         {
             "id": "14",
             "uid": "s:1~l:10~t:14",
@@ -42,11 +39,10 @@ def test_parse_competitors():
             },
             "score": "5",
         },
-    ]
+    ],
+)
 
-    parsed_competitors = scoreboard.parse_competitors(competitors)
-
-    assert parsed_competitors == [blue_jays, dodgers]
-
-
-test_parse_competitors()
+assert isinstance(test_event, scoreboard.Event)
+assert isinstance(test_event.competitors[0], scoreboard.Competitor)
+assert test_event.competitors[0].team == "TOR"
+assert test_event.competitors[1].score == "5"

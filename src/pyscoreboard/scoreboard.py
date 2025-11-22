@@ -1,21 +1,6 @@
 import requests
 
 
-class EventList:
-    def __init__(self, events):
-        self.events = events
-
-
-class Event:
-    def __init__(self, uid, short_name, competitors):
-        self.uid = uid
-        self.short_name = short_name
-        self.competitors = competitors
-
-    def simple_score(self):
-        print("HOME 0   -   0 AWAY")
-
-
 class Competitor:
     def __init__(self, score, team, home_away):
         self.score = score
@@ -26,26 +11,36 @@ class Competitor:
         return all([self.score == other.score])
 
 
-class APIError(Exception):
-    """For holding error responses from the API"""
+class Event:
+    def __init__(self, uid, short_name, competitors):
+        self.uid = uid
+        self.short_name = short_name
+        self.competitors = self._parse_competitors(competitors)
 
-    pass
+    def simple_score(self):
+        print("HOME 0   -   0 AWAY")
 
-
-def parse_competitors(competitors: list[dict]) -> list[Competitor]:
-    # Given competitors
-    # return something like:
-    # { "home": (team, score), "away": (team, score)}
-    parsed = []
-    for c in competitors:
-        parsed.append(
+    @staticmethod
+    def _parse_competitors(competitors: list[dict]) -> list[Competitor]:
+        return [
             Competitor(
                 c["score"],
                 c["team"]["abbreviation"],
                 c["homeAway"],
             )
-        )
-    return parsed
+            for c in competitors
+        ]
+
+
+class EventList:
+    def __init__(self, events):
+        self.events = events
+
+
+class APIError(Exception):
+    """For holding error responses from the API"""
+
+    pass
 
 
 def parse_event(event):
