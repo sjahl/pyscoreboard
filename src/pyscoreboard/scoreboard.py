@@ -38,13 +38,6 @@ class Competitor:
         self.team = self._parse_team(team)
         self.home_away = home_away
 
-    def __eq__(self, other):
-        return all([
-            self.score == other.score,
-            self.team == other.team,
-            self.home_away == other.home_away,
-        ])
-
     @staticmethod
     def _parse_team(team: dict) -> Team:
         return Team(team["abbreviation"], team["displayName"], team["shortDisplayName"])
