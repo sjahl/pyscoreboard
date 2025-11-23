@@ -14,7 +14,7 @@ class ScoreDisplay(Widget):
     ScoreDisplay {
         height: auto;
         padding: 1;
-        border: solid blue;
+        border: solid lightgreen;
     }
 
     ScoreDisplay Static {
