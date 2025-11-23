@@ -693,6 +693,10 @@ source = { editable = "." }
 dependencies = [
     { name = "requests" },
     { name = "textual" },
+]
+
+[package.dev-dependencies]
+dev = [
     { name = "textual-dev" },
 ]
 
@@ -700,8 +704,10 @@ dependencies = [
 requires-dist = [
     { name = "requests", specifier = ">=2.32.5" },
     { name = "textual", specifier = ">=6.6.0" },
-    { name = "textual-dev", specifier = ">=1.8.0" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "textual-dev", specifier = ">=1.8.0" }]
 
 [[package]]
 name = "requests"
