@@ -4,6 +4,7 @@ from textual.widget import Widget
 from textual.widgets import Footer, Header, Static, Button
 
 from .scoreboard import fetch_scoreboard
+from .app import default_league
 
 
 class ScoreDisplay(Widget):
@@ -113,16 +114,12 @@ class ScoreboardApp(App):
         """Handle button clicks"""
         button_id = event.button.id
 
-        sport_map = {
-            "football": ("football", "nfl"),
-            "soccer": ("soccer", "eng.1"),
-            "basketball": ("basketball", "nba"),
-        }
+        sport_list = ["football", "soccer", "basketball"]
 
-        if button_id in sport_map:
-            sport, league = sport_map[button_id]
+        if button_id in sport_list:
+            league = default_league(button_id)
             scoreboard = self.query_one(Scoreboard)
-            scoreboard.reload_scores(sport, league)
+            scoreboard.reload_scores(button_id, league)
 
     def on_mount(self) -> None:
         """Set up the refresh timer when the app starts"""
