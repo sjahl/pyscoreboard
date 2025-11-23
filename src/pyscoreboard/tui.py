@@ -114,9 +114,7 @@ class ScoreboardApp(App):
         """Handle button clicks"""
         button_id = event.button.id
 
-        sport_list = ["football", "soccer", "basketball"]
-
-        if button_id in sport_list:
+        if button_id:
             league = default_league(button_id)
             scoreboard = self.query_one(Scoreboard)
             scoreboard.reload_scores(button_id, league)
