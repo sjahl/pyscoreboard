@@ -1,5 +1,30 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header
+from textual.containers import VerticalGroup
+from textual.widgets import Footer, Header, Label
+
+from .scoreboard import fetch_scoreboard
+
+
+class ScoreDisplay(Label):
+    """A widget to display a sports score"""
+
+
+class Scoreboard(VerticalGroup):
+    """A scoreboard widget"""
+
+    def _fetch_scores(self):
+        scores = fetch_scoreboard("soccer", "eng.1")
+        output = []
+        for game in scores.events:
+            output.append(ScoreDisplay(game.simple_score))
+
+        return output
+
+    def compose(self) -> ComposeResult:
+        """Create child widgets of a scoreboard"""
+        scoreboard = self._fetch_scores()
+        for game in scoreboard:
+            yield game
 
 
 class ScoreboardApp(App):
@@ -10,6 +35,7 @@ class ScoreboardApp(App):
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
         yield Header()
+        yield Scoreboard()
         yield Footer()
 
     def action_toggle_dark(self) -> None:
