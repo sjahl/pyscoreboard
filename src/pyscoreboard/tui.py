@@ -3,8 +3,8 @@ from textual.containers import Horizontal, Grid
 from textual.widget import Widget
 from textual.widgets import Footer, Header, Static, Button
 
-from .scoreboard import fetch_scoreboard
 from .app import default_league
+from .scoreboard import fetch_scoreboard
 
 
 class ScoreDisplay(Widget):
