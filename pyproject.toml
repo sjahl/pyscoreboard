@@ -18,3 +18,4 @@ build-backend = "uv_build"
 
 [project.scripts]
 pyscoreboard = "pyscoreboard.app:run"
+pyscoreboard-tui = "pyscoreboard.tui:main"
