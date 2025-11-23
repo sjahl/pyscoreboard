@@ -1,7 +1,7 @@
 from textual.app import App, ComposeResult
-from textual.containers import VerticalGroup
+from textual.containers import VerticalGroup, Horizontal, Grid
 from textual.widget import Widget
-from textual.widgets import Footer, Header, Label, Static
+from textual.widgets import Footer, Header, Static, Button
 
 from .scoreboard import fetch_scoreboard
 
@@ -26,11 +26,35 @@ class ScoreDisplay(Widget):
         yield Static(self.score)
 
 
-class Scoreboard(VerticalGroup):
+class SportsMenu(Horizontal):
+    """A button menu for selecting sports"""
+
+    DEFAULT_CSS = """
+    SportsMenu {
+        height: 5;
+    }
+    """
+
+    def compose(self) -> ComposeResult:
+        with Horizontal(id="sports"):
+            yield Button("Football", id="football", variant="success")
+
+
+class Scoreboard(Grid):
     """A scoreboard widget"""
 
+    DEFAULT_CSS = """
+    Scoreboard {
+        layout: grid;
+        grid-size: 3 4;
+        grid-rows: 1fr;
+        grid-columns: 1fr;
+        grid-gutter: 1;
+    }
+    """
+
     def _fetch_scores(self):
-        scores = fetch_scoreboard("soccer", "eng.1")
+        scores = fetch_scoreboard("football", "nfl")
         output = []
         for game in scores.events:
             output.append(ScoreDisplay(game.simple_score))
@@ -47,11 +71,14 @@ class Scoreboard(VerticalGroup):
 class ScoreboardApp(App):
     """A textual app to display sports scores"""
 
-    BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
+    BINDINGS = [
+        ("d", "toggle_dark", "Toggle dark mode"),
+    ]
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
         yield Header()
+        yield SportsMenu()
         yield Scoreboard()
         yield Footer()
 
