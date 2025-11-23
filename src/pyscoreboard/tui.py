@@ -1,12 +1,29 @@
 from textual.app import App, ComposeResult
 from textual.containers import VerticalGroup
-from textual.widgets import Footer, Header, Label
+from textual.widget import Widget
+from textual.widgets import Footer, Header, Label, Static
 
 from .scoreboard import fetch_scoreboard
 
 
-class ScoreDisplay(Label):
+class ScoreDisplay(Widget):
     """A widget to display a sports score"""
+
+    DEFAULT_CSS = """
+    ScoreDisplay {
+        height: auto;
+        content-align: left middle;
+        padding: 1;
+        border: solid blue;
+    }
+    """
+
+    def __init__(self, score: str, **kwargs):
+        super().__init__(**kwargs)
+        self.score = score
+
+    def compose(self) -> ComposeResult:
+        yield Static(self.score)
 
 
 class Scoreboard(VerticalGroup):
