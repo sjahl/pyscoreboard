@@ -12,9 +12,13 @@ class ScoreDisplay(Widget):
     DEFAULT_CSS = """
     ScoreDisplay {
         height: auto;
-        content-align: left middle;
         padding: 1;
         border: solid blue;
+    }
+
+    ScoreDisplay Static {
+        text-align: center;
+        width: 100%;
     }
     """
 
