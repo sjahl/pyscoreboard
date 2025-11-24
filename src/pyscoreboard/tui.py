@@ -42,8 +42,9 @@ class SportsMenu(Horizontal):
 
     def compose(self) -> ComposeResult:
         with Horizontal(id="sports"):
-            yield Button("Football", id="football", variant="success")
             yield Button("Soccer", id="soccer", variant="success")
+            yield Button("Hockey", id="hockey", variant="success")
+            yield Button("Football", id="football", variant="success")
             yield Button("Basketball", id="basketball", variant="success")
 
 
@@ -60,7 +61,7 @@ class Scoreboard(Grid):
     }
     """
 
-    def __init__(self, sport: str = "football", league: str = "nfl", **kwargs):
+    def __init__(self, sport: str = "soccer", league: str = "eng.1", **kwargs):
         super().__init__(**kwargs)
         self.sport = sport
         self.league = league
