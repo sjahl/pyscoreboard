@@ -3,7 +3,7 @@ name = "pyscoreboard"
 version = "0.1.0"
 description = "A scoreboard for your terminal"
 authors = [
-    { name = "sjahl", email = "636687+sjahl@users.noreply.github.com" }
+    { name = "sjahl" }
 ]
 requires-python = ">=3.12"
 dependencies = [
