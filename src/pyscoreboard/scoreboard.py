@@ -11,25 +11,13 @@ class Team:
     def abbreviation(self):
         return self._abbreviation
 
-    @abbreviation.setter
-    def abbreviation(self, value):
-        self._abbreviation = value
-
     @property
     def display_name(self):
         return self._display_name
 
-    @display_name.setter
-    def display_name(self, value):
-        self._display_name = value
-
     @property
     def short_name(self):
         return self._short_name
-
-    @short_name.setter
-    def short_name(self, value):
-        self._short_name = value
 
 
 class Competitor:
