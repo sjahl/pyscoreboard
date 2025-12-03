@@ -12,6 +12,13 @@ Install deps with `uv sync`
 
 Run the main executable with `uv run pyscoreboard`
 
+## Running
+
+This ships with two scripts, one for a text-only CLI, and the other with a graphical / TUI interface:
+
+- `pyscoreboard --help`
+- `pyscoreboard-tui`
+
 ## Other implementations
 
 Also exercising this in:

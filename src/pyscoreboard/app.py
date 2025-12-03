@@ -56,6 +56,8 @@ def friendly_league_mapping(league):
         "mx": "mex.1",
         "laliga": "esp.1",
         "ligue-1": "fra.1",
+        "ncaam": "mens-college-basketball",
+        "ncaaw": "womens-college-basketball",
     }
 
     if league in league_aliases.keys():
